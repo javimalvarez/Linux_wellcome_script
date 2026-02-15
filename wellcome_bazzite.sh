@@ -54,10 +54,10 @@ espeak-ng "$SALUDO $USER_CAP. Bienvenido a Linux Mint." -v es -p 50 -s 150 2> /d
 wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.50
 
 # 7. Ventana informativa (Zenity + Fortune + Cowsay)
-FORTUNE_MSG=$(fortune -s linux 2>/dev/null | fmt -w 40 | cowsay -f tux)
+FORTUNE_MSG=$(fortune -s linux | fmt -w 40)
 ICON="distributor-logo-$DISTRO_ID"
 
 zenity --info --title="$DISTRO_NAME" \
-       --text="$DATE\nHola $USER_CAP\nBienvenido a $DISTRO_NAME\n$FORTUNE_MSG" \
+       --text="$(cowsay -f tux "$DATE"$'\n'"Hola $USER_CAP"$'\n'"Bienvenido a $DISTRO_NAME"$'\n\n'"$FORTUNE_MSG")"\
        --width=360 --timeout=5\
        --icon-name="$ICON"
